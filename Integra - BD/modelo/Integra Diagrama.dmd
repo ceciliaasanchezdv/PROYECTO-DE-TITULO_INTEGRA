@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="Integra Diagrama" id="C1DDBD48-5021-B821-6D07-BF1140EACA9D" version="3.5">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 20:30:42 UTC</createdTime>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>C1DDBD48-5021-B821-6D07-BF1140EACA9D</designId>
+</OSDM_Design>

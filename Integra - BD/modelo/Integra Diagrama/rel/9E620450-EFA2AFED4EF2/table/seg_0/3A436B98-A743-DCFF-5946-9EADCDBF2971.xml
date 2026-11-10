@@ -1,0 +1,73 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="3A436B98-A743-DCFF-5946-9EADCDBF2971" name="MARCA">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>4EF6737E-91CE-4CCC-1C00-8A887909EF81</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_marca" id="01E4FB74-4B11-F4A2-0B80-EAFAC9061DD7">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>776B4E64-F8CB-DA17-DA82-620607C7BE38</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,10,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="codigo_marca" id="C1BECF30-BCEB-74E6-AB31-246181EEEA15">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>E131D6EA-67B9-29FD-A456-8D38633BFDE0</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>30 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nombre" id="5E9E2A13-DCB0-16C4-B045-B62B09FB681B">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>81BFFB70-65AA-5B03-6F00-5CDD68E401BC</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>80 CHAR</dataTypeSize>
+<ownDataTypeParameters>80 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="BE2E02E1-5398-EB0A-60CE-1EEB35F4614D" name="MARCA_PK">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>801C7A82-FD39-6820-8C4D-09203245EA9B</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="01E4FB74-4B11-F4A2-0B80-EAFAC9061DD7"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="5432F005-4EFA-7C6A-E54A-FE7BFA29CEB1" name="MARCA_codigo_marca_UN">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>7E93D4D7-C95C-877B-2F10-6A0822F70DA1</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C1BECF30-BCEB-74E6-AB31-246181EEEA15"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

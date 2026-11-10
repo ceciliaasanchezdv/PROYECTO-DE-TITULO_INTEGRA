@@ -1,0 +1,115 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="97910D62-9C6A-BC39-E0BD-A4B807445E8D" name="LOTE">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 20:50:46 UTC</createdTime>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<engineerTo>
+<item key="9E620450-7C5C-8684-0E77-EFA2AFED4EF2" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id_lote" id="4C778498-5668-9717-A90F-43C481CDFD8D">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 20:50:54 UTC</createdTime>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<engineerTo>
+<item key="9E620450-7C5C-8684-0E77-EFA2AFED4EF2" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,10,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="codigo_lote" id="6CC90C47-7901-B77A-7B7A-B8E94F85C636">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 20:51:14 UTC</createdTime>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<engineerTo>
+<item key="9E620450-7C5C-8684-0E77-EFA2AFED4EF2" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>30 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="fecha_recepcion" id="CA844642-1F54-4881-52A9-EC983CBBD4E1">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 20:51:53 UTC</createdTime>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<engineerTo>
+<item key="9E620450-7C5C-8684-0E77-EFA2AFED4EF2" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_proveedor" id="81394F16-E812-2B69-40A0-3D66C4C1D1A3">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 21:04:24 UTC</createdTime>
+<generatorID>E8CA0BE9-A378-B30F-45F0-DBECE889BE2A</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<engineerTo>
+<item key="9E620450-7C5C-8684-0E77-EFA2AFED4EF2" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<referedAttribute>0839D698-E02D-0BC9-3F44-122CDF6CB255</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_modelo" id="7DB4C484-1BB1-7721-330F-3DF2CA4C6729">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 21:07:41 UTC</createdTime>
+<generatorID>944B7FC7-74CB-11BA-9A84-1FDE63A21205</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<engineerTo>
+<item key="9E620450-7C5C-8684-0E77-EFA2AFED4EF2" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<referedAttribute>F89BF59C-ACC8-E9B4-1AFE-BCDEC9F7E7CE</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="E04BF285-5091-B7DA-E272-C2047C52A377" name="LOTE PK">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 20:51:09 UTC</createdTime>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<engineerTo>
+<item key="9E620450-7C5C-8684-0E77-EFA2AFED4EF2" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>4C778498-5668-9717-A90F-43C481CDFD8D</attributeRef>
+</usedAttributes>
+</identifier>
+<identifier id="6EE6DF75-B274-8169-2433-5801BEF9195F" name="codigo_lote">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 21:00:49 UTC</createdTime>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<engineerTo>
+<item key="9E620450-7C5C-8684-0E77-EFA2AFED4EF2" value="true"/>
+</engineerTo>
+<newElementsIDs>6CC90C47-7901-B77A-7B7A-B8E94F85C636</newElementsIDs>
+<usedAttributes>
+<attributeRef>6CC90C47-7901-B77A-7B7A-B8E94F85C636</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

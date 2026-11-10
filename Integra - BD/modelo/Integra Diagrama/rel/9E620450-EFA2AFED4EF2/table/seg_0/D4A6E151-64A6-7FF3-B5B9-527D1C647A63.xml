@@ -1,0 +1,219 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="D4A6E151-64A6-7FF3-B5B9-527D1C647A63" name="SERVICIO_TECNICO">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>5F7BC8FF-BFDA-3196-7956-BA82A99A2E0B</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_servicio" id="7E7D96E2-ABDB-DD1B-C4DF-4469CE13A582">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>537FE6EE-EEA1-F45A-4A83-7717C7E09044</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,10,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="codigo_servicio" id="E981B642-3E07-C7E3-9E99-082092003F6D">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>406ECF98-4324-CBF4-CE49-4FE031439C34</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>30 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fecha_ingreso" id="FCCF2A35-D113-E4AD-949E-1742718D71A3">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>EBBF4E7D-9608-0506-6EAC-B067F4D24B54</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="diagnostico" id="5537FEAE-B6E5-47B8-629D-7E2BBD19C4E5">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>DB8A2042-3BC1-5CB0-B83B-0E15CFA569A1</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>500 CHAR</dataTypeSize>
+<ownDataTypeParameters>500 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fecha_cierre" id="3EC4197E-B362-8E8C-0030-93901233388E">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>0F7B91D8-309D-1963-464F-2052C675CA07</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="resultado" id="66E58FE2-9E3A-9740-9159-1B57DCBCBA7C">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>62798B1A-CFDA-2A39-75AF-40D617402EC4</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>250 CHAR</dataTypeSize>
+<ownDataTypeParameters>250 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DEVOLUCION_id_devolucion" id="068A12B1-1329-B9BA-6211-B0D4153F7673">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>4BA3C669-FC23-0337-16F1-779BC4918232</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="40704267-06B4-17BE-9B0A-383B06D15C1F" referredColumn="266F250B-F638-B4C7-3A19-C378D7A46FF6"/>
+</associations>
+</Column>
+<Column name="SINTOMA_id_sintoma" id="63985540-7629-239E-EBE6-3F98E26CDB3E">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>EF128B2F-66F2-2091-B9C1-59663CF29CFF</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="85541ABC-7A2B-F167-D059-5343DF3D5750" referredColumn="54A66F79-A886-7D5F-895B-63061B6ECE1A"/>
+</associations>
+</Column>
+<Column name="TIPO_INTERVENCION_id_tipo" id="AC59774A-737B-5A78-5457-9808D801F9D2">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>EFA9DFEA-9220-E83C-1FD5-F439E8082BE0</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="E27FDBE6-5F3F-40D1-2C02-BEB47F1C8EE4" referredColumn="BC927A2F-59DB-237D-C26D-D11538F92786"/>
+</associations>
+</Column>
+<Column name="USUARIO_id_usuario" id="D2D13FD2-3399-0743-E968-07FDA57F3E4F">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>BA6B3429-0277-5465-25C2-0C711FE71CA8</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="9749BB58-3EC8-4C75-B96D-8A988ADB6F26" referredColumn="D35197E1-8847-9A29-2C0C-137549BC2547"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="AED51F06-0827-5589-8E8A-99B69520CE6E" name="SERVICIO_TECNICO_PK">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>52D9CC8D-9345-74EE-0C03-EC345F6B961C</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7E7D96E2-ABDB-DD1B-C4DF-4469CE13A582"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="AE2C195A-BEB6-E262-B4C6-B6A5D46E19D6" name="SERVICIO_TECNICO_CODIGO_UK">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>B1E9C0D4-5316-BAFF-8828-7EB6B8D47232</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="E981B642-3E07-C7E3-9E99-082092003F6D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="CA21FD98-BD36-F14F-5CE9-5BB8F4B0CB33" name="SERVICIO_TIPO_INTERV_FK">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>EE7D496E-174B-05B5-DEEA-ADDA364D0A02</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="AC59774A-737B-5A78-5457-9808D801F9D2"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="78678BED-D08D-CE2A-1554-413336D1DB8B" name="SERVICIO_TECNICO_SINTOMA_FK">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>928C4520-B58D-0C8F-F33A-7A4830A38DD6</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="63985540-7629-239E-EBE6-3F98E26CDB3E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="0278744A-57C8-D65D-9361-B1BF93950CCA" name="SERVICIO_TECNICO_DEVOLUCION_FK">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>0AD97466-CA51-73EC-70DA-CEC1D67D00A0</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="068A12B1-1329-B9BA-6211-B0D4153F7673"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="39816D32-7B4F-E75B-1881-F216F70C37D5" name="SERVICIO_TECNICO_USUARIO_FK">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>4BD2FF09-5933-B16B-FC78-96D5CAC26FED</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D2D13FD2-3399-0743-E968-07FDA57F3E4F"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

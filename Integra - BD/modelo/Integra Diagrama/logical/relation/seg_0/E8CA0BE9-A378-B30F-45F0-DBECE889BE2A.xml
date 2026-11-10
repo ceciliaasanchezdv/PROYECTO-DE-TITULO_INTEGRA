@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="suministra" directorySegmentName="seg_0" id="E8CA0BE9-A378-B30F-45F0-DBECE889BE2A">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 21:04:24 UTC</createdTime>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<engineerTo>
+<item key="9E620450-7C5C-8684-0E77-EFA2AFED4EF2" value="true"/>
+</engineerTo>
+<sourcePk>5E6CA5F4-01D5-D838-1E8D-3C5304DF553D</sourcePk>
+<identifying>false</identifying>
+<optionalSource>false</optionalSource>
+<optionalTarget>true</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>7A3AEB8B-1CC4-3C0D-B0C9-04F297692316</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>97910D62-9C6A-BC39-E0BD-A4B807445E8D</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

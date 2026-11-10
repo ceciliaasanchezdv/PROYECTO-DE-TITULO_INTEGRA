@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="251F3624-F05E-35AC-852E-CC545B16FD84" containerWithKeyObject="9C7C4583-467F-E5C2-0B42-23EAA08C69B1" localFKIndex="DFFACB8A-FC6A-62C7-FD50-10472D363476" name="UNIDAD_LOTE_FK">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>BC51BD24-333D-584E-AEE5-DAF945EBDF52</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<referredTableLongName>LOTE</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>0CB5324B-1B43-4DC2-629D-9F2719B451BE</referredTableID>
+<keyObject>0201F8B7-18B7-A81A-843E-BAC4A18B7F67</keyObject>
+<referredKeyID>0201F8B7-18B7-A81A-843E-BAC4A18B7F67</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id_lote</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

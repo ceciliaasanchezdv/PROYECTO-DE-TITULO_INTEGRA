@@ -1,0 +1,127 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="1173F902-9F42-476A-4E06-15622C477868" name="UNIDAD">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 20:36:05 UTC</createdTime>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<engineerTo>
+<item key="9E620450-7C5C-8684-0E77-EFA2AFED4EF2" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id_unidad" id="A6592066-DA9C-D513-01F8-BD5029350E03">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 20:38:45 UTC</createdTime>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<engineerTo>
+<item key="9E620450-7C5C-8684-0E77-EFA2AFED4EF2" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<structuredType>47E390DE-0671-C4B1-8428-0F45CBEE18F8</structuredType>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,10,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="codigo_interno" id="55B898AA-CE5D-B587-6CF8-5121F0839F72">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 20:37:42 UTC</createdTime>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<engineerTo>
+<item key="9E620450-7C5C-8684-0E77-EFA2AFED4EF2" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>30 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="numero_serie" id="13962229-1544-0A23-957C-60396FF50E58">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 20:38:09 UTC</createdTime>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<engineerTo>
+<item key="9E620450-7C5C-8684-0E77-EFA2AFED4EF2" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>80 CHAR</dataTypeSize>
+<ownDataTypeParameters>80 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="fecha_ingreso" id="7EF9C68E-B7AB-5125-94C5-1E1759B18DF9">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 20:38:13 UTC</createdTime>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<engineerTo>
+<item key="9E620450-7C5C-8684-0E77-EFA2AFED4EF2" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="estado_actual" id="DC967459-C6AE-DD40-890C-70AF10357738">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 20:38:21 UTC</createdTime>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<engineerTo>
+<item key="9E620450-7C5C-8684-0E77-EFA2AFED4EF2" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>20 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_lote" id="B9343EEC-1922-102B-6F7F-4F4E04295490">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 20:55:01 UTC</createdTime>
+<generatorID>BC51BD24-333D-584E-AEE5-DAF945EBDF52</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<engineerTo>
+<item key="9E620450-7C5C-8684-0E77-EFA2AFED4EF2" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<referedAttribute>4C778498-5668-9717-A90F-43C481CDFD8D</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="E67C7BC2-D96A-2F4D-9FAC-EC7245D6D368" name="UNIDAD PK">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 20:37:11 UTC</createdTime>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<engineerTo>
+<item key="9E620450-7C5C-8684-0E77-EFA2AFED4EF2" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>A6592066-DA9C-D513-01F8-BD5029350E03</attributeRef>
+</usedAttributes>
+</identifier>
+<identifier id="D2BDBEA3-CFED-6744-0D8E-57ED620F4FFE" name="codigo_interno">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 20:49:51 UTC</createdTime>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<engineerTo>
+<item key="9E620450-7C5C-8684-0E77-EFA2AFED4EF2" value="true"/>
+</engineerTo>
+<newElementsIDs>55B898AA-CE5D-B587-6CF8-5121F0839F72</newElementsIDs>
+<usedAttributes>
+<attributeRef>55B898AA-CE5D-B587-6CF8-5121F0839F72</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

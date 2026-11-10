@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="tiene_modelos" directorySegmentName="seg_0" id="737CE58F-B30A-31F5-7848-17130BC30D9A">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 21:10:32 UTC</createdTime>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<engineerTo>
+<item key="9E620450-7C5C-8684-0E77-EFA2AFED4EF2" value="true"/>
+</engineerTo>
+<sourcePk>801C7A82-FD39-6820-8C4D-09203245EA9B</sourcePk>
+<identifying>false</identifying>
+<optionalSource>false</optionalSource>
+<optionalTarget>true</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>4EF6737E-91CE-4CCC-1C00-8A887909EF81</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>3B67199B-AF8F-B97F-D7D6-CEF511BD7E57</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

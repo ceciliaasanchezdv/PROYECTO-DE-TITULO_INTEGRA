@@ -1,0 +1,126 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="0CB5324B-1B43-4DC2-629D-9F2719B451BE" name="LOTE">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>97910D62-9C6A-BC39-E0BD-A4B807445E8D</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_lote" id="631943B3-294E-1045-6D94-2723B52ED51D">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>4C778498-5668-9717-A90F-43C481CDFD8D</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,10,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="codigo_lote" id="00F1C3EC-17AF-F6D9-A725-5C9124F45888">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>6CC90C47-7901-B77A-7B7A-B8E94F85C636</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>30 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fecha_recepcion" id="4441DE50-0E2C-D47F-AC4A-EB16B6453CC3">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>CA844642-1F54-4881-52A9-EC983CBBD4E1</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PROVEEDOR_id_proveedor" id="995D02B5-F368-DCE8-5CFF-5689D3594085">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>81394F16-E812-2B69-40A0-3D66C4C1D1A3</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="5819D5BF-36C1-C067-09CA-8F6FE7B534DF" referredColumn="02D619CF-0101-22F1-6896-88C2A00C8738"/>
+</associations>
+</Column>
+<Column name="MODELO_id_modelo" id="C479D033-9CF8-1193-CA10-3F4EDCB6317B">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>7DB4C484-1BB1-7721-330F-3DF2CA4C6729</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="84AFA6D7-7715-84C6-D67E-644CEF855D65" referredColumn="44C540BE-4B21-95E4-2D6F-F1D6B62BB258"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="0201F8B7-18B7-A81A-843E-BAC4A18B7F67" name="LOTE_PK">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>E04BF285-5091-B7DA-E272-C2047C52A377</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="631943B3-294E-1045-6D94-2723B52ED51D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="EB7F472C-EDD0-21D6-791D-531C07DDAD5B" name="LOTE_codigo_lote_UN">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>6EE6DF75-B274-8169-2433-5801BEF9195F</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="00F1C3EC-17AF-F6D9-A725-5C9124F45888"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="0828E1CD-1878-8F7F-F09A-D1C6DFD8D1F1" name="LOTE_MODELO_FK">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>944B7FC7-74CB-11BA-9A84-1FDE63A21205</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C479D033-9CF8-1193-CA10-3F4EDCB6317B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="C5EF42F2-8993-6042-E6B5-7CB32BC2D2B8" name="LOTE_PROVEEDOR_FK">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>E8CA0BE9-A378-B30F-45F0-DBECE889BE2A</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="995D02B5-F368-DCE8-5CFF-5689D3594085"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

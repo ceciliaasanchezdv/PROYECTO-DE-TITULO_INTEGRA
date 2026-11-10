@@ -1,0 +1,185 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="5F7BC8FF-BFDA-3196-7956-BA82A99A2E0B" name="SERVICIO_TECNICO">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 21:29:07 UTC</createdTime>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<engineerTo>
+<item key="9E620450-7C5C-8684-0E77-EFA2AFED4EF2" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id_servicio" id="537FE6EE-EEA1-F45A-4A83-7717C7E09044">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 21:29:11 UTC</createdTime>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<engineerTo>
+<item key="9E620450-7C5C-8684-0E77-EFA2AFED4EF2" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,10,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="codigo_servicio" id="406ECF98-4324-CBF4-CE49-4FE031439C34">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 21:29:44 UTC</createdTime>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<engineerTo>
+<item key="9E620450-7C5C-8684-0E77-EFA2AFED4EF2" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>30 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="fecha_ingreso" id="EBBF4E7D-9608-0506-6EAC-B067F4D24B54">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 21:30:05 UTC</createdTime>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<engineerTo>
+<item key="9E620450-7C5C-8684-0E77-EFA2AFED4EF2" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="diagnostico" id="DB8A2042-3BC1-5CB0-B83B-0E15CFA569A1">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 21:30:15 UTC</createdTime>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<engineerTo>
+<item key="9E620450-7C5C-8684-0E77-EFA2AFED4EF2" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>500 CHAR</dataTypeSize>
+<ownDataTypeParameters>500 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="fecha_cierre" id="0F7B91D8-309D-1963-464F-2052C675CA07">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 21:30:23 UTC</createdTime>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<engineerTo>
+<item key="9E620450-7C5C-8684-0E77-EFA2AFED4EF2" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="resultado" id="62798B1A-CFDA-2A39-75AF-40D617402EC4">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 21:30:43 UTC</createdTime>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<engineerTo>
+<item key="9E620450-7C5C-8684-0E77-EFA2AFED4EF2" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>250 CHAR</dataTypeSize>
+<ownDataTypeParameters>250 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_devolucion" id="4BA3C669-FC23-0337-16F1-779BC4918232">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 21:31:44 UTC</createdTime>
+<generatorID>0AD97466-CA51-73EC-70DA-CEC1D67D00A0</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<engineerTo>
+<item key="9E620450-7C5C-8684-0E77-EFA2AFED4EF2" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<referedAttribute>2CF58606-B292-14A7-1B38-826FAC37F0C0</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_sintoma" id="EF128B2F-66F2-2091-B9C1-59663CF29CFF">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 21:31:55 UTC</createdTime>
+<generatorID>928C4520-B58D-0C8F-F33A-7A4830A38DD6</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<engineerTo>
+<item key="9E620450-7C5C-8684-0E77-EFA2AFED4EF2" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<referedAttribute>095BD2FD-B940-F9BB-2266-160308D8CC44</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_tipo_intervencion" id="EFA9DFEA-9220-E83C-1FD5-F439E8082BE0">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 21:32:06 UTC</createdTime>
+<generatorID>EE7D496E-174B-05B5-DEEA-ADDA364D0A02</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<engineerTo>
+<item key="9E620450-7C5C-8684-0E77-EFA2AFED4EF2" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<referedAttribute>C7366A05-BDB8-0E7B-1C47-19AC8E38A279</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_usuario" id="BA6B3429-0277-5465-25C2-0C711FE71CA8">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 21:32:28 UTC</createdTime>
+<generatorID>4BD2FF09-5933-B16B-FC78-96D5CAC26FED</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<engineerTo>
+<item key="9E620450-7C5C-8684-0E77-EFA2AFED4EF2" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<referedAttribute>0A602BA5-3262-E73A-2273-00F1BDADD351</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="52D9CC8D-9345-74EE-0C03-EC345F6B961C" name="SERVICIO_TECNICO PK">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 21:29:43 UTC</createdTime>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<engineerTo>
+<item key="9E620450-7C5C-8684-0E77-EFA2AFED4EF2" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>537FE6EE-EEA1-F45A-4A83-7717C7E09044</attributeRef>
+</usedAttributes>
+</identifier>
+<identifier id="B1E9C0D4-5316-BAFF-8828-7EB6B8D47232" name="codigo_servicio">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 21:29:56 UTC</createdTime>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<engineerTo>
+<item key="9E620450-7C5C-8684-0E77-EFA2AFED4EF2" value="true"/>
+</engineerTo>
+<newElementsIDs>406ECF98-4324-CBF4-CE49-4FE031439C34</newElementsIDs>
+</identifier>
+</identifiers>
+</Entity>

@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="clasifica_intervencion" directorySegmentName="seg_0" id="EE7D496E-174B-05B5-DEEA-ADDA364D0A02">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 21:32:06 UTC</createdTime>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<engineerTo>
+<item key="9E620450-7C5C-8684-0E77-EFA2AFED4EF2" value="true"/>
+</engineerTo>
+<sourcePk>8355E49E-D32A-2214-B81B-8DF7A3C0DA13</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>true</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>BCB36EA3-B52E-DD6E-D353-31677607DA02</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>5F7BC8FF-BFDA-3196-7956-BA82A99A2E0B</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

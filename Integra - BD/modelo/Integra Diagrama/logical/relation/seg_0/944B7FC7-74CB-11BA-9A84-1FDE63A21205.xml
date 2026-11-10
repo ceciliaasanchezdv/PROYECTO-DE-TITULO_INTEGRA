@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="agrupa_lotes" directorySegmentName="seg_0" id="944B7FC7-74CB-11BA-9A84-1FDE63A21205">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 21:07:41 UTC</createdTime>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<engineerTo>
+<item key="9E620450-7C5C-8684-0E77-EFA2AFED4EF2" value="true"/>
+</engineerTo>
+<sourcePk>C3765467-1F2D-8A92-6EB7-7434E8DB2E02</sourcePk>
+<identifying>false</identifying>
+<optionalSource>false</optionalSource>
+<optionalTarget>true</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>3B67199B-AF8F-B97F-D7D6-CEF511BD7E57</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>97910D62-9C6A-BC39-E0BD-A4B807445E8D</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

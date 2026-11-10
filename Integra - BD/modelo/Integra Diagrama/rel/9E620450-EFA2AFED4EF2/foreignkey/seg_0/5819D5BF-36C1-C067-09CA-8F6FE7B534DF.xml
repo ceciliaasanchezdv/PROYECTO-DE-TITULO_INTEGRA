@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="5819D5BF-36C1-C067-09CA-8F6FE7B534DF" containerWithKeyObject="0CB5324B-1B43-4DC2-629D-9F2719B451BE" localFKIndex="C5EF42F2-8993-6042-E6B5-7CB32BC2D2B8" name="LOTE_PROVEEDOR_FK">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>E8CA0BE9-A378-B30F-45F0-DBECE889BE2A</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<referredTableLongName>PROVEEDOR</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>76AB0C10-63F9-87F5-4B33-9216BC11735D</referredTableID>
+<keyObject>F0B71191-D761-FFD1-3C3E-C5E7F5925847</keyObject>
+<referredKeyID>F0B71191-D761-FFD1-3C3E-C5E7F5925847</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id_proveedor</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

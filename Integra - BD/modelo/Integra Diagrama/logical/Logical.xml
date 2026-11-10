@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<LogicalDesign class="oracle.dbtools.crest.model.design.logical.LogicalDesign" name="Logical" id="CF2CFCFB-CDBC-5723-FB05-B5569FF5A361" mainViewID="FF8B2058-D578-662B-1B84-CC40D238C04E">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 20:30:42 UTC</createdTime>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+</LogicalDesign>

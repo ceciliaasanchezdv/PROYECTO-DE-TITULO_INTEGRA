@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="40704267-06B4-17BE-9B0A-383B06D15C1F" containerWithKeyObject="D4A6E151-64A6-7FF3-B5B9-527D1C647A63" localFKIndex="0278744A-57C8-D65D-9361-B1BF93950CCA" name="SERVICIO_TECNICO_DEVOLUCION_FK">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>0AD97466-CA51-73EC-70DA-CEC1D67D00A0</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<referredTableLongName>DEVOLUCION</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>28BEFE85-D0D3-170F-FDF1-06329496EAD0</referredTableID>
+<keyObject>65C89096-056B-47E4-7332-6232129C58F2</keyObject>
+<referredKeyID>65C89096-056B-47E4-7332-6232129C58F2</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id_devolucion</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

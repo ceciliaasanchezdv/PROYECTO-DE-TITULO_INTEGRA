@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="A01AE1E4-9FCF-8180-645E-F47595E4844B" containerWithKeyObject="CB4C6A34-47FE-8F1C-36B3-FA642E7666C0" localFKIndex="B13E96BB-BCEB-C9E2-B0F3-2F747F35F060" name="DETALLE_VENTA_VENTA_FK">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>1566D85C-2DA4-B5CD-008C-2F69035C76B0</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<referredTableLongName>VENTA</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>B4512EB5-C24E-860D-A055-FF1BF8A186A8</referredTableID>
+<keyObject>105D8F24-D751-B363-F848-552A03D96333</keyObject>
+<referredKeyID>105D8F24-D751-B363-F848-552A03D96333</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id_venta</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

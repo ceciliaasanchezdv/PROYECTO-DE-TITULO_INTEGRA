@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="registra_servicio" directorySegmentName="seg_0" id="4BD2FF09-5933-B16B-FC78-96D5CAC26FED">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 21:32:28 UTC</createdTime>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<engineerTo>
+<item key="9E620450-7C5C-8684-0E77-EFA2AFED4EF2" value="true"/>
+</engineerTo>
+<sourcePk>36C2B897-C31A-1C5A-6D5D-0F632191F7F7</sourcePk>
+<identifying>false</identifying>
+<optionalSource>false</optionalSource>
+<optionalTarget>true</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>566464C4-36E5-4FA9-6718-9A2D72DC454E</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>5F7BC8FF-BFDA-3196-7956-BA82A99A2E0B</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

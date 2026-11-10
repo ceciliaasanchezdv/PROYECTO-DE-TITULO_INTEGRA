@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="origina_devolucion" directorySegmentName="seg_0" id="B2D45E78-EAD9-36F5-F29A-13E743D1EE21">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-10-26 21:22:36 UTC</createdTime>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<engineerTo>
+<item key="9E620450-7C5C-8684-0E77-EFA2AFED4EF2" value="true"/>
+</engineerTo>
+<sourcePk>7BB6F569-0684-B5D5-02B7-3882359AB70C</sourcePk>
+<identifying>false</identifying>
+<optionalSource>false</optionalSource>
+<optionalTarget>true</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>2942B497-6EC9-2FF6-ED59-3DA00883624F</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>376C10F3-4011-9B26-A60F-151246722BD9</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

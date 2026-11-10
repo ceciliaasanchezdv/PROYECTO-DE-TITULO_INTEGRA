@@ -1,0 +1,105 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="CB4C6A34-47FE-8F1C-36B3-FA642E7666C0" name="DETALLE_VENTA">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>2942B497-6EC9-2FF6-ED59-3DA00883624F</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_detalle_venta" id="875DC499-79B4-B61C-4510-B647A9D36957">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>6C28D945-E0A0-67E6-A201-F18551F3BA80</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,10,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="precio_venta" id="223D2BA7-4216-B649-B66D-A94716CD0B9E">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>F73FC77E-C55D-76D0-00D1-5E58694DABD1</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>12</dataTypePrecision>
+<ownDataTypeParameters>,12,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="VENTA_id_venta" id="4015A058-1408-B67A-19DA-92303A2B190D">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>0D18130A-6ADB-3877-5272-2042EFAACD08</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="A01AE1E4-9FCF-8180-645E-F47595E4844B" referredColumn="DB625EFA-98E9-4D89-7779-D4C5B5721E5A"/>
+</associations>
+</Column>
+<Column name="UNIDAD_id_unidad" id="64F97E11-4AB3-2A4D-0E43-1D38AAE290FC">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>442EB88B-EF88-9F1F-CACB-C3CA866FB0F1</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<structuredType>47E390DE-0671-C4B1-8428-0F45CBEE18F8</structuredType>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="CD907C78-CEB4-0749-AC72-F85C35699CFC" referredColumn="3E5EA967-ACD4-92B2-DEC8-98FC66E8796C"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="7DB5CF70-C4B4-859D-D714-4B9A0E9D1D2E" name="DETALLE_VENTA_PK">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>7BB6F569-0684-B5D5-02B7-3882359AB70C</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="875DC499-79B4-B61C-4510-B647A9D36957"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="1C30BF5E-4E16-D89D-BB59-A90C8E95B90E" name="DETALLE_VENTA_UNIDAD_FK">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>178BBEC8-C7B1-44E2-A789-0749C73746D0</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="64F97E11-4AB3-2A4D-0E43-1D38AAE290FC"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="B13E96BB-BCEB-C9E2-B0F3-2F747F35F060" name="DETALLE_VENTA_VENTA_FK">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>1566D85C-2DA4-B5CD-008C-2F69035C76B0</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="4015A058-1408-B67A-19DA-92303A2B190D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

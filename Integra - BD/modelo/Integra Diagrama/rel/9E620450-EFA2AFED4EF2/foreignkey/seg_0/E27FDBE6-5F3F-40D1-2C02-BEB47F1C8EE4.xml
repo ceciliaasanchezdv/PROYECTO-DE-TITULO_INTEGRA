@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="E27FDBE6-5F3F-40D1-2C02-BEB47F1C8EE4" containerWithKeyObject="D4A6E151-64A6-7FF3-B5B9-527D1C647A63" localFKIndex="CA21FD98-BD36-F14F-5CE9-5BB8F4B0CB33" name="SERVICIO_TIPO_INTERV_FK">
+<createdBy>ceci2</createdBy>
+<createdTime>2026-11-09 05:20:32 UTC</createdTime>
+<generatorID>EE7D496E-174B-05B5-DEEA-ADDA364D0A02</generatorID>
+<ownerDesignName>Integra Diagrama</ownerDesignName>
+<referredTableLongName>TIPO_INTERVENCION</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>15CFB5B8-F5A3-4FD7-CC90-A658CF9B23E9</referredTableID>
+<keyObject>E62DA1DA-4A6C-0EED-C0B6-9DAD9E3CC20C</keyObject>
+<referredKeyID>E62DA1DA-4A6C-0EED-C0B6-9DAD9E3CC20C</referredKeyID>
+<mandatory>false</mandatory>
+<refColNames>id_tipo_intervencion</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

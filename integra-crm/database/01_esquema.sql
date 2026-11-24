@@ -1,3 +1,5 @@
+--   sitio:      Oracle Database 21c
+
 CREATE TABLE CATEGORIA 
     ( 
      id_categoria     NUMBER (10)  NOT NULL , 

@@ -2,7 +2,7 @@
 Aplicación de TecnoHogar para registrar lotes, unidades, ventas, devoluciones y servicios técnicos, y consultar el historial de cada unidad. Incluye perfiles **Operador** y **Supervisor**. La interfaz usa Vue 3; el servidor usa Node.js, Express y Oracle Database.
 
 ## Estado del proyecto
-**El entorno de trabajo actual es Oracle Cloud.** El esquema `INTEGRA` tiene quince tablas y diecisiete claves foráneas. La aplicación, iniciada en el equipo de desarrollo, se conectó por TLS y mostró el resumen, el historial y los dos análisis con datos sintéticos `DEMO26`. Las pruebas con datos ficticios no representan conclusiones sobre operaciones reales.
+La aplicación está [publicada en Render](https://proyecto-de-titulo-integra.onrender.com/) y se conecta mediante TLS al esquema `INTEGRA` de Oracle Autonomous Database. El esquema tiene quince tablas y diecisiete claves foráneas. La aplicación mostró el resumen, el historial y los dos análisis con datos sintéticos `DEMO26`. Las pruebas con datos ficticios no representan conclusiones sobre operaciones reales.
 
 ## Requisitos
 - Node.js 22 o posterior.

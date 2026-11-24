@@ -4,7 +4,7 @@ Integra es un proyecto académico para registrar ventas, devoluciones y servicio
 
 ## Estado del proyecto
 
-La aplicación web está implementada con Vue 3, Node.js y Express. Se ejecutó en el equipo de desarrollo conectada al esquema `INTEGRA` de Oracle Autonomous Database mediante TLS. La base implementada tiene 15 tablas y 17 claves foráneas. Las pruebas con datos ficticios `DEMO26` comprobaron los dos informes, permisos por perfil, reglas de integridad y el ROLLBACK de una venta fallida.
+La aplicación web está implementada con Vue 3, Node.js y Express y [publicada en Render](https://proyecto-de-titulo-integra.onrender.com/). El servidor se conecta mediante TLS al esquema `INTEGRA` de Oracle Autonomous Database. La base implementada tiene 15 tablas y 17 claves foráneas. Las pruebas con datos ficticios `DEMO26` comprobaron los dos informes, permisos por perfil, reglas de integridad y el ROLLBACK de una venta fallida.
 
 ## Carpetas
 

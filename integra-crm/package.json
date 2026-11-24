@@ -1,0 +1,25 @@
+{
+  "name": "integra-crm",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sistema web de trazabilidad para TecnoHogar",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "check:db": "node scripts/check-db.js",
+    "seed:users": "node scripts/seed-users.js",
+    "seed:demo": "node scripts/seed-demo.js",
+    "test:rollback": "node scripts/test-sale-rollback.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "bcryptjs": "3.0.3",
+    "dotenv": "^17.2.3",
+    "express": "5.3.0",
+    "oracledb": "26.0.0",
+    "vue": "3.5.46"
+  }
+}

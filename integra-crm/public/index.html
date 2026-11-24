@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Integra · TecnoHogar</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script defer src="/vendor/vue.js"></script>
+  <script defer src="/search-picker.js"></script>
+  <script defer src="/app.js"></script>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <main v-if="loading" class="loading-screen"><div class="card">Cargando Integra…</div></main>
+
+    <main v-else-if="!user" class="login-shell">
+      <aside class="login-intro">
+        <div class="login-brand"><span class="brand-mark">I</span><strong>Integra</strong></div>
+        <div class="intro-copy"><h1>Control de cada unidad, de la venta al servicio técnico.</h1><p>Plataforma interna de TecnoHogar para registrar unidades, ventas, devoluciones e intervenciones técnicas.</p></div>
+        <small>TecnoHogar · Integra</small>
+      </aside>
+      <div class="login-main">
+        <form class="card login-card" @submit.prevent="login">
+          <h2>Iniciar sesión</h2>
+          <p>Usa tu cuenta autorizada de TecnoHogar.</p>
+          <label>Correo electrónico<input type="email" v-model.trim="loginForm.correo" autocomplete="username" required></label>
+          <label>Contraseña<input type="password" v-model="loginForm.clave" autocomplete="current-password" required></label>
+          <button class="primary" :disabled="busy">{{ busy ? 'Ingresando…' : 'Iniciar sesión' }}</button>
+          <p v-if="message.text" :class="['notice', message.kind]" role="alert">{{ message.text }}</p>
+          <p class="login-help">¿Problemas para acceder? Contacta a tu supervisor.</p>
+        </form>
+        <small class="login-foot">Acceso exclusivo para personal autorizado de TecnoHogar.</small>
+      </div>
+    </main>
+
+    <div v-else class="layout">
+      <header class="topbar">
+        <form class="global-search" @submit.prevent="runGlobalSearch"><input v-model.trim="globalQuery" placeholder="Buscar unidad, serie, venta o cliente" aria-label="Buscar unidad, serie, venta o cliente"><button type="submit" aria-label="Buscar" :disabled="globalSearchBusy">{{ globalSearchBusy ? '…' : '⌕' }}</button></form>
+        <div class="user-area"><span class="avatar">{{ initials }}</span><span><strong>{{ user.nombre }}</strong><small>{{ user.perfil === 'SUPERVISOR' ? 'Supervisor' : 'Operador' }}</small></span><button class="quiet" @click="logout">Salir</button></div>
+      </header>
+      <nav class="sidebar" aria-label="Secciones">
+        <div class="sidebar-brand"><span class="brand-mark">I</span><strong>Integra</strong></div>
+        <div class="nav-group"><span class="nav-label">Principal</span><button :class="{ active: tab === 'inicio' }" @click="navigate('inicio')">⌂ <span>Inicio</span></button></div>
+        <div class="nav-group"><span class="nav-label">Gestión</span><button v-for="section in sections.filter(s => ['catalogos','unidades','clientes'].includes(s.id))" :key="section.id" :class="{ active: tab === section.id }" @click="navigate(section.id)">▦ <span>{{ section.label === 'Catálogos' ? 'Catálogo' : section.label }}</span></button></div>
+        <div class="nav-group"><span class="nav-label">Operaciones</span><button v-for="section in sections.filter(s => ['ventas','devoluciones','servicio'].includes(s.id))" :key="section.id" :class="{ active: tab === section.id }" @click="navigate(section.id)">◈ <span>{{ section.label }}</span></button></div>
+        <div class="nav-group"><span class="nav-label">Análisis</span><button :class="{ active: tab === 'historial' }" @click="navigate('historial')">◷ <span>Historial</span></button><button :class="{ active: tab === 'analisis' }" @click="navigate('analisis')">▥ <span>Análisis</span></button></div>
+        <div v-if="isSupervisor" class="nav-group"><span class="nav-label">Supervisor</span><button :class="{ active: tab === 'cuentas' }" @click="navigate('cuentas')">⚙ <span>Administración</span></button></div>
+      </nav>
+
+      <main class="content">
+        <p v-if="globalSearchBusy || searchNotice" class="notice info" role="status">{{ searchVolume > 200 ? 'Hay más de 200 unidades, clientes y ventas para consultar. La búsqueda podría tardar más de lo habitual.' : 'Buscando en todos los registros…' }}</p>
+        <p v-if="message.text" :class="['notice', message.kind]" role="alert">{{ message.text }}</p>
+
+        <section v-if="tab === 'inicio'">
+          <div class="page-heading"><div><h1>Resumen de operaciones</h1><p>Ventas, devoluciones y servicios técnicos del período seleccionado</p></div></div>
+          <div class="dashboard-period"><small v-if="dashboardData">Actualizado: {{ dateTime(dashboardData.calculado_en) }}</small><label>Período <input type="month" v-model="dashboardMonth" @change="loadDashboard"></label><button class="outline" @click="navigate('analisis'); loadAnalysis()">Ver informe</button></div>
+          <div class="metric-row"><div class="metric"><span class="metric-icon blue">◇</span><div><strong>{{ dashboardData?.resumen.VENTAS_PERIODO ?? 0 }} ventas</strong><small>Ventas del período</small></div></div><div class="metric"><span class="metric-icon amber">↺</span><div><strong>{{ dashboardData?.resumen.DEVOLUCIONES_ABIERTAS ?? 0 }} casos</strong><small>Devoluciones abiertas</small></div></div><div class="metric"><span class="metric-icon coral">▣</span><div><strong>{{ dashboardData?.resumen.UNIDADES_REVISION ?? 0 }} unidades</strong><small>Unidades en revisión</small></div></div></div>
+          <div class="dashboard-grid">
+            <div class="chart-panel"><div class="section-row"><div><h2>Ventas y devoluciones por período</h2><p>Registros por semana · {{ dashboardMonth }}</p></div><div class="chart-legend"><span><i class="legend-sales"></i>Ventas</span><span><i class="legend-returns"></i>Devoluciones</span></div></div>
+              <div class="chart"><div class="chart-week" v-for="week in dashboardWeeks" :key="week.label"><div class="chart-bars"><span class="bar sales" :style="{ height: (week.ventas / dashboardScale * 100) + '%' }" :title="week.ventas + ' ventas'"></span><span class="bar returns" :style="{ height: (week.devoluciones / dashboardScale * 100) + '%' }" :title="week.devoluciones + ' devoluciones'"></span></div><small>{{ week.label }}</small><b>{{ week.ventas }} / {{ week.devoluciones }}</b></div></div>
+              <p v-if="!dashboardWeeks.some(w => w.ventas || w.devoluciones)" class="muted">Aún no hay ventas ni devoluciones en este período.</p>
+            </div>
+            <div class="dashboard-aside">
+              <div class="card side-stat"><span>Servicios técnicos abiertos</span><strong>{{ dashboardData?.resumen.SERVICIOS_ABIERTOS ?? 0 }}</strong><small>Ingresos sin cerrar</small><button class="link" @click="navigate('servicio')">Ver servicios técnicos ›</button></div>
+              <div class="card side-stat"><span>Unidades disponibles</span><strong>{{ dashboardData?.resumen.UNIDADES_DISPONIBLES ?? 0 }}</strong><small>De {{ dashboardData?.resumen.UNIDADES_TOTAL ?? 0 }} unidades registradas</small><div class="availability-track"><span :style="{ width: dashboardAvailabilityPct + '%' }"></span></div><small>{{ dashboardAvailabilityPct }} % disponibles para venta</small><span v-if="dashboardData?.lote_destacado" class="lot-badge">+{{ dashboardData.lote_destacado.DISPONIBLES }} · {{ dashboardData.lote_destacado.CODIGO_LOTE }}</span><button class="link" @click="navigate('unidades')">Ver unidades ›</button></div>
+              <div class="card side-stat"><span>Hallazgos para revisar</span><strong>{{ dashboardFindingCount }}</strong><small v-if="dashboardFindings">Fecha de corte {{ dateOnly(dashboardFindings.fecha_corte) }}</small><div v-if="dashboardFindingBadges.length" class="finding-badges"><span v-for="badge in dashboardFindingBadges" :key="badge.text" :class="badge.type">{{ badge.text }}</span></div><small v-else>No hay hallazgos con los criterios actuales.</small><button class="link" @click="navigate('analisis'); loadAnalysis()">Revisar análisis ›</button></div>
+            </div>
+          </div>
+          <div class="recent-panel"><div class="section-row"><h2>Últimas operaciones</h2><button class="outline" @click="navigate('historial')">Ver historial</button></div><div class="table-wrap"><table><thead><tr><th>Código</th><th>Operación</th><th>Unidad</th><th>Fecha</th><th>Responsable</th><th>Estado</th><th></th></tr></thead><tbody><tr v-for="item in recentOperations" :key="item.tab + item.id"><td><strong>{{ item.codigo }}</strong></td><td>{{ item.tipo }}</td><td>{{ item.unidad }}</td><td>{{ dateOnly(item.fecha) }}</td><td>{{ item.responsable }}</td><td><span :class="['status-chip', statusClass(item.estado)]">{{ item.estado }}</span></td><td><button class="link" @click="openRecent(item)">Ver</button></td></tr></tbody></table></div><p v-if="!recentOperations.length" class="muted">Aún no hay operaciones registradas.</p></div>
+        </section>
+
+        <section v-if="tab === 'catalogos'">
+          <div class="page-heading"><div><p class="eyebrow">Datos de referencia</p><h1>Catálogos</h1></div><button v-if="isSupervisor" class="primary" @click="showCatalogForm ? resetCatalogForm() : showCatalogForm = true">{{ showCatalogForm ? 'Cerrar formulario' : '+ Agregar al catálogo' }}</button></div>
+          <div class="card">
+            <label>Catálogo<select v-model="catalogType" @change="resetCatalogForm(); loadCatalogType()">
+              <option v-for="item in catalogOptions" :value="item.id">{{ item.label }}</option>
+            </select></label>
+            <form v-if="isSupervisor && showCatalogForm" @submit.prevent="saveCatalog" class="form-grid">
+              <label v-for="field in catalogFields" :key="field.key">{{ field.label }}
+                <search-picker v-if="field.options" v-model="catalogForm[field.key]" :options="field.options" id-key="id" :label-keys="['label']" :required="field.required" :placeholder="'Buscar o seleccionar ' + field.label.toLowerCase()" @search="catalogOptionQueries[field.source] = $event; searchOption('catalog:' + field.source)" @selected="rememberSelectedOption('catalog:' + field.source, $event)"></search-picker>
+                <input v-else :type="field.type || 'text'" v-model="catalogForm[field.key]" :required="field.required">
+              </label>
+              <div class="form-actions"><button class="primary" :disabled="busy">{{ catalogEditId ? 'Guardar cambios' : 'Agregar' }}</button><button type="button" class="quiet" @click="resetCatalogForm">Cancelar</button></div>
+            </form>
+          </div>
+          <div class="card"><div class="section-row"><h2>Registros</h2><input class="search" v-model="catalogQuery" @input="searchCatalog" placeholder="Buscar código o nombre" aria-label="Buscar en catálogo"></div><div class="table-wrap"><table><thead><tr><th v-for="field in catalogListFields" :key="field">{{ field }}</th><th v-if="isSupervisor">Acción</th></tr></thead><tbody>
+            <tr v-for="item in catalogItems" :key="item[catalogIdField]"><td v-for="field in catalogListFields" :key="field">{{ display(item[field]) }}</td><td v-if="isSupervisor"><button class="link" @click="editCatalog(item)">Editar</button></td></tr>
+          </tbody></table></div><p v-if="!catalogItems.length" class="muted">No hay registros para mostrar.</p><button v-if="moreAvailable('catalog')" class="outline load-more" :disabled="loadingMore" @click="loadMore('catalog')">{{ loadingMore ? 'Cargando…' : 'Cargar más registros' }}</button></div>
+        </section>
+
+        <section v-if="tab === 'clientes'">
+          <div class="page-heading"><div><p class="eyebrow">Operaciones</p><h1>Clientes</h1></div><button class="primary" @click="showClientForm ? resetClientForm() : showClientForm = true">{{ showClientForm ? 'Cerrar formulario' : '+ Registrar cliente' }}</button></div>
+          <form v-if="showClientForm" class="card form-grid" @submit.prevent="saveClient">
+            <label>Código *<input v-model.trim="clientForm.codigo_cliente" maxlength="30" required></label>
+            <label>Nombre *<input v-model.trim="clientForm.nombre" maxlength="100" required></label>
+            <label>Correo<input type="email" v-model.trim="clientForm.correo" maxlength="120"></label>
+            <label>Teléfono<input v-model.trim="clientForm.telefono" maxlength="30"></label>
+            <div class="form-actions"><button class="primary" :disabled="busy">{{ clientEditId ? 'Guardar cambios' : 'Registrar cliente' }}</button><button type="button" class="quiet" @click="resetClientForm">Cancelar</button></div>
+          </form>
+          <div class="card"><div class="section-row"><h2>Clientes registrados</h2><input class="search" placeholder="Buscar por código o nombre" v-model="clientSearch" @input="searchClients"></div><div class="table-wrap"><table><thead><tr><th>Código</th><th>Nombre</th><th>Correo</th><th>Teléfono</th><th>Acción</th></tr></thead><tbody>
+            <tr v-for="item in visibleClients" :key="item.ID_CLIENTE"><td>{{ item.CODIGO_CLIENTE }}</td><td>{{ item.NOMBRE }}</td><td>{{ item.CORREO }}</td><td>{{ item.TELEFONO }}</td><td><button class="link" @click="editClient(item)">Editar</button></td></tr>
+          </tbody></table></div><button v-if="moreAvailable('clients')" class="outline load-more" :disabled="loadingMore" @click="loadMore('clients')">{{ loadingMore ? 'Cargando…' : 'Cargar más clientes' }}</button></div>
+        </section>
+
+        <section v-if="tab === 'unidades'">
+          <div class="page-heading"><div><h1>Unidades</h1><p>Busca y consulta las unidades por código interno o número de serie.</p></div><button class="primary" @click="showUnitForm ? resetUnitForm() : showUnitForm = true">{{ showUnitForm ? 'Cerrar formulario' : '+ Registrar unidad' }}</button></div>
+          <form v-if="showUnitForm" class="card form-grid" @submit.prevent="createUnit">
+            <label>Código interno *<input v-model.trim="unitForm.codigo_interno" maxlength="30" required></label>
+            <label>Número de serie<input v-model.trim="unitForm.numero_serie" maxlength="80"></label>
+            <label>Fecha de ingreso *<input type="date" v-model="unitForm.fecha_ingreso" required></label>
+            <label>Lote *<search-picker v-model="unitForm.LOTE_id_lote" :options="catalogOptionResults.lotes ?? catalogs.lotes" id-key="ID_LOTE" :label-keys="['CODIGO_LOTE']" required placeholder="Buscar o seleccionar lote" @search="catalogOptionQueries.lotes = $event; searchOption('catalog:lotes')" @selected="rememberSelectedOption('catalog:lotes', $event)"></search-picker></label>
+            <div class="form-actions"><button class="primary" :disabled="busy">Registrar unidad</button><button type="button" class="quiet" @click="resetUnitForm">Cancelar</button></div>
+          </form>
+          <div class="filter-tabs"><button v-for="filter in [{id:'TODAS',label:'Todas'},{id:'DISPONIBLE',label:'Disponibles'},{id:'VENDIDA',label:'Vendidas'},{id:'REVISION',label:'En revisión'},{id:'EN_SERVICIO',label:'En servicio'},{id:'BAJA',label:'De baja'}]" :key="filter.id" :class="{ active: unitStatusFilter === filter.id }" @click="unitStatusFilter = filter.id; searchUnits()">{{ filter.label }}</button></div>
+          <div class="unit-filters"><input class="search" placeholder="Código interno o número de serie" v-model="unitSearch" @input="searchUnits"><span>{{ visibleUnits.length }} unidades mostradas{{ moreAvailable('units') ? ' (hay más)' : '' }}</span></div>
+          <div class="card"><div class="table-wrap"><table><thead><tr><th>Código</th><th>Modelo</th><th>Número de serie</th><th>Lote</th><th>Proveedor</th><th>Estado</th><th>Acción</th></tr></thead><tbody>
+            <tr v-for="item in visibleUnits" :key="item.ID_UNIDAD"><td><button class="link" @click="openHistory(item)">{{ item.CODIGO_INTERNO }}</button></td><td>{{ item.MODELO }}</td><td>{{ item.NUMERO_SERIE }}</td><td>{{ item.CODIGO_LOTE }}</td><td>{{ item.PROVEEDOR }}</td><td><span :class="['status-chip', statusClass(item.ESTADO_ACTUAL)]">{{ item.ESTADO_ACTUAL }}</span></td><td><button class="link" @click="openHistory(item)">Historial</button></td></tr>
+          </tbody></table></div><button v-if="moreAvailable('units')" class="outline load-more" :disabled="loadingMore" @click="loadMore('units')">{{ loadingMore ? 'Cargando…' : 'Cargar más unidades' }}</button></div>
+        </section>
+
+        <section v-if="tab === 'ventas'">
+          <div class="page-heading"><div><p class="breadcrumbs">Operaciones › Ventas</p><h1>Ventas</h1><p>Consulta las ventas o registra una nueva con unidades disponibles.</p></div><button class="primary" @click="showSaleForm ? resetSaleForm() : startSaleForm()">{{ showSaleForm ? 'Cerrar formulario' : '+ Registrar venta' }}</button></div>
+          <form v-if="showSaleForm" class="card form-grid sale-form" @submit.prevent="createSale">
+            <h2 class="full">Datos de la venta</h2>
+            <label>Código de venta *<input v-model.trim="saleForm.codigo_venta" maxlength="30" required></label>
+            <label>Fecha *<input type="date" v-model="saleForm.fecha_venta" required></label>
+            <label>Cliente *<search-picker v-model="saleForm.CLIENTE_id_cliente" :options="clientOptions" id-key="ID_CLIENTE" :label-keys="['CODIGO_CLIENTE', 'NOMBRE']" required placeholder="Buscar o seleccionar cliente" @search="clientOptionQuery = $event; searchOption('client')" @selected="rememberSelectedOption('client', $event)"></search-picker></label>
+            <div class="full"><h2>Unidades seleccionadas</h2><p v-if="!saleForm.unidades.length" class="muted">Selecciona una unidad de la lista disponible debajo.</p><div v-for="(line, index) in saleForm.unidades" :key="line.id_unidad" class="line-grid">
+              <span class="selected-unit">{{ saleUnit(line.id_unidad)?.CODIGO_INTERNO }} · {{ saleUnit(line.id_unidad)?.MODELO }}</span>
+              <input type="number" min="0" step="1" v-model="line.precio_venta" :aria-label="'Precio de ' + saleUnit(line.id_unidad)?.CODIGO_INTERNO" placeholder="Precio de venta" required>
+              <button type="button" class="quiet" @click="removeSaleLine(index)">Quitar</button>
+            </div></div>
+            <div class="form-actions"><button class="primary" :disabled="busy">Confirmar venta</button><button type="button" class="quiet" @click="resetSaleForm">Cancelar</button></div>
+          </form>
+          <aside v-if="selectedSale && !showSaleForm" class="card operation-summary sale-summary"><div class="section-row"><h2>Resumen de {{ selectedSale.CODIGO_VENTA }}</h2><button class="quiet" @click="selectedSale = null">Cerrar resumen</button></div><div><span>Unidades</span><strong>{{ selectedSale.detalles.length }}</strong></div><div><span>Subtotal</span><strong>{{ money(selectedSaleTotal) }}</strong></div><div class="summary-total"><span>Total de la venta</span><strong>{{ money(selectedSaleTotal) }}</strong></div><p>Cliente: {{ selectedSale.CLIENTE }} · Fecha: {{ dateOnly(selectedSale.FECHA_VENTA) }} · Registró: {{ selectedSale.OPERADOR }}</p><div class="table-wrap"><table><thead><tr><th>Unidad</th><th>Modelo</th><th>Serie</th><th>Precio</th></tr></thead><tbody><tr v-for="line in selectedSale.detalles" :key="line.ID_DETALLE_VENTA"><td>{{ line.CODIGO_INTERNO }}</td><td>{{ line.MODELO }}</td><td>{{ line.NUMERO_SERIE || '—' }}</td><td>{{ money(line.PRECIO_VENTA) }}</td></tr></tbody></table></div></aside>
+          <div v-if="showSaleForm" class="card"><div class="section-row"><h2>Unidades disponibles para agregar</h2><input class="search" v-model="saleUnitSearch" @input="searchSaleUnits" placeholder="Buscar código o serie" aria-label="Buscar unidad para la venta"></div><p v-if="!availableUnits.length" class="muted">{{ saleUnitSearch ? 'No se encontraron unidades disponibles con ese dato.' : 'No hay unidades disponibles. Registra una unidad antes de crear una venta.' }}</p><div v-else class="table-wrap"><table><thead><tr><th>Código</th><th>Modelo</th><th>Serie</th><th>Lote</th><th>Acción</th></tr></thead><tbody><tr v-for="u in availableUnits" :key="u.ID_UNIDAD"><td>{{ u.CODIGO_INTERNO }}</td><td>{{ u.MODELO }}</td><td>{{ u.NUMERO_SERIE || '—' }}</td><td>{{ u.CODIGO_LOTE }}</td><td><button class="outline" type="button" @click="selectSaleUnit(u)" :disabled="saleForm.unidades.some(line => line.id_unidad === u.ID_UNIDAD)">Seleccionar</button></td></tr></tbody></table></div><button v-if="pageInfo[saleUnitSearch.trim() ? 'saleCandidates:' + saleUnitSearch.trim() : 'saleAvailable']?.hasMore" class="outline load-more" :disabled="loadingMore" @click="loadMoreSaleUnits">{{ loadingMore ? 'Cargando…' : 'Cargar más unidades disponibles' }}</button></div>
+          <div class="card"><div class="section-row"><h2>Ventas registradas</h2><input class="search" v-model="listQueries.sales" @input="searchOperationList('sales')" placeholder="Buscar venta o cliente" aria-label="Buscar ventas"></div><p class="muted">Selecciona una venta para consultar sus unidades y el total.</p><div class="table-wrap"><table><thead><tr><th>Código</th><th>Fecha</th><th>Cliente</th><th>Unidades</th><th>Operador</th><th>Acción</th></tr></thead><tbody>
+            <tr v-for="v in visibleSales" :key="v.ID_VENTA" :class="{ 'selected-row': selectedSale?.ID_VENTA === v.ID_VENTA }"><td><button class="link" @click="selectRegisteredSale(v)">{{ v.CODIGO_VENTA }}</button></td><td>{{ dateOnly(v.FECHA_VENTA) }}</td><td>{{ v.CLIENTE }}</td><td>{{ v.UNIDADES }}</td><td>{{ v.OPERADOR }}</td><td><button class="outline" @click="selectRegisteredSale(v)">Ver resumen</button></td></tr>
+          </tbody></table></div><button v-if="moreAvailable('sales')" class="outline load-more" :disabled="loadingMore" @click="loadMore('sales')">{{ loadingMore ? 'Cargando…' : 'Cargar más ventas' }}</button></div>
+        </section>
+
+        <section v-if="tab === 'devoluciones'">
+          <div class="page-heading"><div><p class="breadcrumbs">Operaciones › Devoluciones</p><h1>Devoluciones</h1><p>Consulta los casos o elige la acción que necesitas.</p></div></div>
+          <div class="action-chooser"><button :class="returnAction === 'register' ? 'primary' : 'outline'" @click="chooseReturnAction('register')">{{ returnAction === 'register' ? 'Cerrar formulario' : '+ Registrar devolución' }}</button><button :class="returnAction === 'close' ? 'primary' : 'outline'" @click="chooseReturnAction('close')">{{ returnAction === 'close' ? 'Cerrar formulario' : 'Resolver devolución' }}</button></div>
+          <div v-if="returnAction === 'register'" class="operation-layout"><form class="card form-grid" @submit.prevent="createReturn">
+            <h2 class="full">Datos de la devolución</h2>
+            <label>Código *<input v-model.trim="returnForm.codigo_devolucion" maxlength="30" required></label>
+            <label>Fecha *<input type="date" v-model="returnForm.fecha_devolucion" required></label>
+            <label>Unidad y venta *<search-picker v-model="returnForm.DETALLE_VENTA_id_detalle_venta" :options="returnDetailOptions" id-key="ID_DETALLE_VENTA" :label-keys="['CODIGO_INTERNO', 'CODIGO_VENTA']" required placeholder="Buscar unidad, serie o venta" @search="returnDetailQuery = $event; searchOption('detail')" @selected="rememberSelectedOption('detail', $event)"></search-picker></label>
+            <label>Motivo *<select v-model="returnForm.motivo" required><option value="">Selecciona…</option><option>Falla de funcionamiento</option><option>Producto dañado</option><option>Garantía</option><option>Cambio solicitado</option></select></label>
+            <div class="form-actions"><button class="primary" :disabled="busy">Registrar devolución</button><button type="button" class="quiet" @click="resetReturnForms">Cancelar</button></div>
+          </form><aside class="card operation-summary"><h2>Venta asociada</h2><template v-if="selectedReturnDetail"><p><strong>Cliente:</strong> {{ selectedReturnDetail.CLIENTE }}</p><p><strong>Venta:</strong> {{ selectedReturnDetail.CODIGO_VENTA }}</p><p><strong>Fecha:</strong> {{ dateOnly(selectedReturnDetail.FECHA_VENTA) }}</p><p><strong>Unidad:</strong> {{ selectedReturnDetail.CODIGO_INTERNO }}</p></template><p v-else>Selecciona una unidad vendida para ver su venta.</p><p class="summary-note">Al registrar la devolución, la unidad pasa a revisión.</p></aside></div>
+          <form v-if="returnAction === 'close'" class="card form-grid" @submit.prevent="closeReturn">
+            <h2 class="full">Resolver devolución sin servicio abierto</h2>
+            <label>Devolución abierta *<search-picker v-model="returnClose.id" :options="returnOpenOptions" id-key="ID_DEVOLUCION" :label-keys="['CODIGO_DEVOLUCION', 'CODIGO_INTERNO']" required placeholder="Buscar o seleccionar devolución" @search="returnOpenQuery = $event; searchOption('returnOpen')" @selected="rememberSelectedOption('returnOpen', $event)"></search-picker></label>
+            <label>Fecha de cierre *<input type="date" v-model="returnClose.fecha_cierre" required></label>
+            <label>Destino *<select v-model="returnClose.destino_final" required><option value="">Selecciona…</option><option value="ENTREGADA">Entregada al cliente</option><option value="DISPONIBLE">Reincorporada</option><option value="BAJA">Baja</option></select></label>
+            <div class="form-actions"><button class="secondary" :disabled="busy">Confirmar destino</button><button type="button" class="quiet" @click="resetReturnForms">Cancelar</button></div>
+          </form>
+          <div class="card"><div class="section-row"><h2>Devoluciones registradas</h2><input class="search" v-model="listQueries.returns" @input="searchOperationList('returns')" placeholder="Buscar devolución o unidad" aria-label="Buscar devoluciones"></div><div class="table-wrap"><table><thead><tr><th>Código</th><th>Fecha</th><th>Unidad</th><th>Motivo</th><th>Estado</th></tr></thead><tbody>
+            <tr v-for="d in visibleReturns" :key="d.ID_DEVOLUCION"><td>{{ d.CODIGO_DEVOLUCION }}</td><td>{{ dateOnly(d.FECHA_DEVOLUCION) }}</td><td>{{ d.CODIGO_INTERNO }}</td><td>{{ d.MOTIVO }}</td><td><span :class="['status-chip', statusClass(d.FECHA_CIERRE ? d.DESTINO_FINAL : 'ABIERTA')]">{{ d.FECHA_CIERRE ? d.DESTINO_FINAL : 'ABIERTA' }}</span></td></tr>
+          </tbody></table></div><button v-if="moreAvailable('returns')" class="outline load-more" :disabled="loadingMore" @click="loadMore('returns')">{{ loadingMore ? 'Cargando…' : 'Cargar más devoluciones' }}</button></div>
+        </section>
+
+        <section v-if="tab === 'servicio'">
+          <div class="page-heading"><div><p class="eyebrow">Taller</p><h1>Servicio técnico</h1><p>Consulta servicios o elige la etapa que necesitas completar.</p></div></div>
+          <div class="action-chooser"><button :class="serviceAction === 'open' ? 'primary' : 'outline'" @click="chooseServiceAction('open')">{{ serviceAction === 'open' ? 'Cerrar formulario' : '+ Abrir servicio' }}</button><button :class="serviceAction === 'component' ? 'primary' : 'outline'" @click="chooseServiceAction('component')">{{ serviceAction === 'component' ? 'Cerrar formulario' : 'Registrar componente' }}</button><button :class="serviceAction === 'close' ? 'primary' : 'outline'" @click="chooseServiceAction('close')">{{ serviceAction === 'close' ? 'Cerrar formulario' : 'Cerrar servicio' }}</button></div>
+          <p v-if="serviceAction === 'component'" class="notice info">Si el servicio requiere componentes, regístralos aquí. Después puedes pasar al cierre o volver más tarde.</p>
+          <form v-if="serviceAction === 'open'" class="card form-grid" @submit.prevent="createService">
+            <h2 class="full">Abrir servicio</h2>
+            <label>Código *<input v-model.trim="serviceForm.codigo_servicio" maxlength="30" required></label>
+            <label>Fecha de ingreso *<input type="date" v-model="serviceForm.fecha_ingreso" required></label>
+            <label>Unidad vendida *<search-picker v-model="serviceForm.UNIDAD_id_unidad" :options="serviceUnitOptions" id-key="ID_UNIDAD" :label-keys="['CODIGO_INTERNO']" status-key="ESTADO_ACTUAL" required placeholder="Buscar código o serie de unidad" @search="serviceUnitQuery = $event; searchOption('serviceUnit')" @selected="serviceForm.DEVOLUCION_id_devolucion = ''; rememberSelectedOption('serviceUnit', $event)"></search-picker></label>
+            <label>Devolución asociada<search-picker v-model="serviceForm.DEVOLUCION_id_devolucion" :options="serviceReturnOptions" id-key="ID_DEVOLUCION" :label-keys="['CODIGO_DEVOLUCION', 'CODIGO_INTERNO']" empty-label="Sin devolución" :placeholder="serviceForm.UNIDAD_id_unidad ? 'Buscar o seleccionar devolución' : 'Selecciona primero una unidad'" @search="returnOpenQuery = $event; searchOption('returnOpen')" @selected="rememberSelectedOption('returnOpen', $event)"></search-picker></label>
+            <label>Síntoma *<search-picker v-model="serviceForm.SINTOMA_id_sintoma" :options="catalogOptionResults.sintomas ?? catalogs.sintomas" id-key="ID_SINTOMA" :label-keys="['NOMBRE']" required placeholder="Buscar o seleccionar síntoma" @search="catalogOptionQueries.sintomas = $event; searchOption('catalog:sintomas')" @selected="rememberSelectedOption('catalog:sintomas', $event)"></search-picker></label>
+            <label class="full">Diagnóstico<textarea v-model.trim="serviceForm.diagnostico" maxlength="500"></textarea></label>
+            <div class="form-actions"><button class="primary" :disabled="busy">Abrir servicio</button><button type="button" class="quiet" @click="resetServiceForms">Cancelar</button></div>
+          </form>
+          <form v-if="serviceAction === 'close'" class="card form-grid" @submit.prevent="closeService">
+            <h2 class="full">Cerrar servicio</h2>
+            <label>Servicio abierto *<search-picker v-model="serviceClose.id" :options="serviceOpenOptions" id-key="ID_SERVICIO" :label-keys="['CODIGO_SERVICIO', 'CODIGO_INTERNO']" required placeholder="Buscar o seleccionar servicio" @search="serviceOpenQuery = $event; searchOption('serviceOpen')" @selected="rememberSelectedOption('serviceOpen', $event)"></search-picker></label>
+            <label>Fecha de cierre *<input type="date" v-model="serviceClose.fecha_cierre" required></label>
+            <label>Tipo de intervención *<search-picker v-model="serviceClose.TIPO_INTERVENCION_id_tipo" :options="catalogOptionResults.intervenciones ?? catalogs.intervenciones" id-key="ID_TIPO_INTERVENCION" :label-keys="['NOMBRE']" required placeholder="Buscar o seleccionar intervención" @search="catalogOptionQueries.intervenciones = $event; searchOption('catalog:intervenciones')" @selected="rememberSelectedOption('catalog:intervenciones', $event)"></search-picker></label>
+            <label>Destino *<select v-model="serviceClose.destino_final" required><option value="">Selecciona…</option><option value="ENTREGADA">Entregada al cliente</option><option value="DISPONIBLE">Reincorporada</option><option value="BAJA">Baja</option></select></label>
+            <label class="full">Resultado *<textarea v-model.trim="serviceClose.resultado" maxlength="250" required></textarea></label>
+            <div class="form-actions"><button class="secondary" :disabled="busy">Cerrar servicio y confirmar destino</button><button type="button" class="quiet" @click="resetServiceForms">Cancelar</button></div>
+          </form>
+          <form v-if="serviceAction === 'component'" class="card form-grid" @submit.prevent="addComponent">
+            <h2 class="full">Componente utilizado</h2>
+            <label>Servicio abierto *<search-picker v-model="componentForm.id" :options="serviceOpenOptions" id-key="ID_SERVICIO" :label-keys="['CODIGO_SERVICIO', 'CODIGO_INTERNO']" required placeholder="Buscar o seleccionar servicio" @search="serviceOpenQuery = $event; searchOption('serviceOpen')" @selected="rememberSelectedOption('serviceOpen', $event); refreshComponents()"></search-picker></label>
+            <label>Componente *<input v-model.trim="componentForm.nombre" maxlength="120" required></label>
+            <label>Cantidad *<input type="number" min="1" max="99999" step="1" v-model.number="componentForm.cantidad" required></label>
+            <label>Observación<input v-model.trim="componentForm.observacion" maxlength="250"></label>
+            <div class="form-actions"><button class="secondary" :disabled="busy">Agregar componente</button><button type="button" class="quiet" @click="serviceAction = 'close'; serviceClose.id = componentForm.id">Continuar al cierre</button><button type="button" class="quiet" @click="resetServiceForms">Cancelar</button></div>
+            <div v-if="componentForm.id" class="full"><h3>Componentes registrados</h3><p v-if="!components.length" class="muted">Aún no hay componentes asociados.</p><div v-else class="component-chips"><span v-for="c in components" :key="c.ID_COMPONENTE_UTILIZADO">{{ c.NOMBRE }} × {{ c.CANTIDAD }}</span></div></div>
+          </form>
+          <div class="card"><div class="section-row"><h2>Servicios registrados</h2><input class="search" v-model="listQueries.services" @input="searchOperationList('services')" placeholder="Buscar servicio o unidad" aria-label="Buscar servicios"></div><div class="table-wrap"><table><thead><tr><th>Código</th><th>Ingreso</th><th>Unidad</th><th>Síntoma</th><th>Intervención</th><th>Estado</th></tr></thead><tbody>
+            <tr v-for="s in visibleServices" :key="s.ID_SERVICIO"><td>{{ s.CODIGO_SERVICIO }}</td><td>{{ dateOnly(s.FECHA_INGRESO) }}</td><td>{{ s.CODIGO_INTERNO }}</td><td>{{ s.SINTOMA }}</td><td>{{ s.INTERVENCION || 'Pendiente' }}</td><td><span :class="['status-chip', statusClass(s.FECHA_CIERRE ? 'CERRADO' : 'ABIERTO')]">{{ s.FECHA_CIERRE ? 'CERRADO' : 'ABIERTO' }}</span></td></tr>
+          </tbody></table></div><button v-if="moreAvailable('services')" class="outline load-more" :disabled="loadingMore" @click="loadMore('services')">{{ loadingMore ? 'Cargando…' : 'Cargar más servicios' }}</button></div>
+        </section>
+
+        <section v-if="tab === 'historial'">
+          <div class="page-heading"><div><p class="breadcrumbs">Unidades › Historial</p><h1>{{ selectedHistoryUnit ? 'Historial de la unidad ' + selectedHistoryUnit.CODIGO_INTERNO : 'Historial de unidad' }}</h1><p>Recorrido completo de la unidad, con fechas y responsables.</p></div><span v-if="selectedHistoryUnit" :class="['status-chip', statusClass(selectedHistoryUnit.ESTADO_ACTUAL)]">{{ selectedHistoryUnit.ESTADO_ACTUAL }}</span></div>
+          <div class="card history-picker"><label>Código o número de serie<search-picker v-model="historyUnit" :options="historyQuery ? historyMatches : units" id-key="ID_UNIDAD" :label-keys="['CODIGO_INTERNO', 'NUMERO_SERIE', 'MODELO']" status-key="ESTADO_ACTUAL" placeholder="Buscar o seleccionar unidad" @search="historyQuery = $event; historyPickerSearch()" @selected="selectHistoryPicker($event)"></search-picker></label></div>
+          <div v-if="selectedHistoryUnit" class="history-summary"><div><small>Código</small><strong>{{ selectedHistoryUnit.CODIGO_INTERNO }}</strong></div><div><small>Número de serie</small><strong>{{ selectedHistoryUnit.NUMERO_SERIE || '—' }}</strong></div><div><small>Modelo</small><strong>{{ selectedHistoryUnit.MODELO }}</strong></div><div><small>Lote</small><strong>{{ selectedHistoryUnit.CODIGO_LOTE }}</strong></div><div><small>Proveedor</small><strong>{{ selectedHistoryUnit.PROVEEDOR }}</strong></div></div>
+          <div v-if="history.length"><h2>Línea cronológica</h2><div class="timeline-list"><div class="timeline" v-for="(event, i) in history" :key="i"><span :class="['timeline-dot', event.TIPO.toLowerCase()]"></span><div class="timeline-card"><strong>{{ event.TIPO.replaceAll('_', ' ') }} · {{ event.CODIGO }}</strong><p>{{ event.DETALLE }}</p><small>{{ dateOnly(event.FECHA) }}<span v-if="event.USUARIO"> · Registró: {{ event.USUARIO }}</span></small></div></div></div></div>
+        </section>
+
+        <section v-if="tab === 'analisis'">
+          <p class="eyebrow">Hallazgos</p><h1>Análisis e informes</h1>
+          <div class="card form-grid">
+            <label>Desde<input type="date" v-model="analysisStart" :max="analysisDate" @change="analysis = null"></label>
+            <label>Hasta (fecha de corte)<input type="date" v-model="analysisDate" :min="analysisStart" @change="analysis = null"></label>
+            <p class="full muted">El rango filtra las operaciones del resumen. Para comparar lotes se consideran ventas con 30 días de seguimiento; para reingresos, servicios cerrados con 90 días de seguimiento.</p>
+            <div class="form-actions"><button class="primary" :disabled="busy" @click="loadAnalysis">Calcular informe</button><button v-if="analysis" class="quiet" @click="printReport">Imprimir</button></div>
+          </div>
+          <div v-if="analysis" class="filter-tabs"><button :class="{ active: analysisView === 'devoluciones' }" @click="analysisView = 'devoluciones'">Primeras devoluciones</button><button :class="{ active: analysisView === 'reincidencias' }" @click="analysisView = 'reincidencias'">Reincidencias</button></div>
+          <template v-if="analysis">
+            <div class="card"><h2>Resumen del {{ dateOnly(analysis.fecha_desde) }} al {{ dateOnly(analysis.fecha_corte) }}</h2><p>Ventas: {{ analysis.resumen.VENTAS }} · Devoluciones: {{ analysis.resumen.DEVOLUCIONES }} · Unidades devueltas: {{ analysis.resumen.UNIDADES_DEVUELTAS }} · Servicios: {{ analysis.resumen.SERVICIOS }}</p><small>Actualizado: {{ dateTime(analysis.calculado_en) }} · Datos disponibles a la fecha de corte.</small></div>
+            <div v-if="featuredFinding" class="analysis-kpis"><div v-for="(kpi, i) in analysisKpis" :key="kpi.label" class="analysis-kpi"><span :class="['metric-icon', ['coral','blue','amber','blue'][i]]">{{ ['▥','▤','±','↺'][i] }}</span><div><strong>{{ kpi.value }}</strong><small>{{ kpi.label }}</small></div></div></div>
+            <div v-if="analysisView === 'devoluciones'" class="card"><h2>Primeras devoluciones por lote</h2><p>{{ analysis.primeras_devoluciones.periodo }}</p><p>Un hallazgo requiere al menos {{ analysis.primeras_devoluciones.minimo_casos }} ventas del lote y de otros lotes del mismo modelo, y una diferencia de {{ analysis.primeras_devoluciones.diferencia_minima_puntos }} puntos porcentuales.</p>
+              <p v-if="!analysis.primeras_devoluciones.grupos.length" class="muted">Aún no hay datos del período para calcular esta comparación.</p>
+              <div v-else class="table-wrap"><table><thead><tr><th>Modelo</th><th>Lote</th><th>Vendidas</th><th>Devueltas</th><th>Tasa</th><th>Muestra</th></tr></thead><tbody><tr v-for="g in analysis.primeras_devoluciones.grupos"><td>{{ g.modelo }}</td><td>{{ g.lote }}</td><td>{{ g.vendidas }}</td><td>{{ g.primeras_devoluciones }}</td><td>{{ g.tasa }} %</td><td>{{ g.datos_suficientes ? 'Suficiente' : 'Insuficiente' }}</td></tr></tbody></table></div>
+              <h3>Hallazgos</h3><p v-if="!analysis.primeras_devoluciones.hallazgos.length">No se detectaron diferencias con los criterios definidos.</p><div v-for="h in analysis.primeras_devoluciones.hallazgos" class="finding"><strong>El lote {{ h.lote }} concentra primeras devoluciones</strong><p>De {{ h.vendidas_lote }} unidades vendidas, {{ h.devoluciones_lote }} tuvieron su primera devolución dentro de 30 días: {{ h.tasa_lote }} % frente a {{ h.tasa_otros_lotes }} % en los otros lotes del mismo modelo. Diferencia: {{ h.diferencia_puntos }} puntos porcentuales. Es un hallazgo para revisión, no una causa confirmada.</p><h4>Registros de respaldo</h4><div class="table-wrap"><table><thead><tr><th>Devolución</th><th>Unidad</th><th>Venta</th><th>Fecha de devolución</th><th>Días desde venta</th><th>Motivo</th></tr></thead><tbody><tr v-for="r in h.registros" :key="r.id_devolucion"><td>{{ r.id_devolucion }}</td><td>{{ r.unidad }}</td><td>{{ r.venta }}</td><td>{{ dateOnly(r.fecha_devolucion) }}</td><td>{{ r.dias_desde_venta }}</td><td>{{ r.motivo }}</td></tr></tbody></table></div></div>
+            </div>
+            <div v-if="analysisView === 'reincidencias'" class="card"><h2>Reingresos por síntoma</h2><p>{{ analysis.reincidencias.periodo }}</p><p>Se comparan tipos de intervención del mismo modelo y síntoma con al menos {{ analysis.reincidencias.minimo_casos }} servicios cerrados por grupo y {{ analysis.reincidencias.diferencia_minima_puntos }} puntos de diferencia.</p>
+              <p v-if="!analysis.reincidencias.grupos.length" class="muted">Aún no hay datos del período para calcular esta comparación.</p>
+              <div v-else class="table-wrap"><table><thead><tr><th>Modelo</th><th>Síntoma</th><th>Intervención</th><th>Cerrados</th><th>Reingresos</th><th>Tasa</th><th>Muestra</th></tr></thead><tbody><tr v-for="g in analysis.reincidencias.grupos"><td>{{ g.modelo }}</td><td>{{ g.sintoma }}</td><td>{{ g.intervencion }}</td><td>{{ g.cerrados }}</td><td>{{ g.reincidencias }}</td><td>{{ g.tasa }} %</td><td>{{ g.datos_suficientes ? 'Suficiente' : 'Insuficiente' }}</td></tr></tbody></table></div>
+              <h3>Hallazgos</h3><p v-if="!analysis.reincidencias.hallazgos.length">No se detectaron diferencias con los criterios definidos.</p><div v-for="h in analysis.reincidencias.hallazgos" class="finding"><strong>Reingresos tras {{ h.intervencion }}</strong><p>En {{ h.modelo }} con el síntoma «{{ h.sintoma }}», {{ h.reincidencias_intervencion }} de {{ h.cerrados_intervencion }} servicios cerrados tuvieron un nuevo ingreso por el mismo síntoma dentro de 90 días: {{ h.tasa_intervencion }} % frente a {{ h.tasa_otras_intervenciones }} % con otras intervenciones. Diferencia: {{ h.diferencia_puntos }} puntos porcentuales. El resultado requiere revisión técnica.</p><h4>Registros de respaldo</h4><div class="table-wrap"><table><thead><tr><th>Unidad</th><th>Servicio cerrado</th><th>Fecha de cierre</th><th>Nuevo servicio</th><th>Fecha de reingreso</th></tr></thead><tbody><tr v-for="r in h.registros" :key="r.servicio_reingreso"><td>{{ r.unidad }}</td><td>{{ r.servicio_base }}</td><td>{{ dateOnly(r.fecha_cierre) }}</td><td>{{ r.servicio_reingreso }}</td><td>{{ dateOnly(r.fecha_reingreso) }}</td></tr></tbody></table></div></div>
+            </div>
+          </template>
+        </section>
+
+        <section v-if="tab === 'cuentas' && isSupervisor">
+          <div class="page-heading"><div><h1>Cuentas de usuario</h1><p>Crea, actualiza o desactiva las cuentas de operadores y supervisores.</p></div><button class="primary" @click="showAccountForm = !showAccountForm; if (!showAccountForm) resetAccountForm()">{{ showAccountForm ? 'Cerrar formulario' : '+ Crear cuenta' }}</button></div>
+          <form v-if="showAccountForm" class="card form-grid" @submit.prevent="createAccount">
+            <label>Nombre *<input v-model.trim="accountForm.nombre" maxlength="100" required></label>
+            <label>Correo *<input type="email" v-model.trim="accountForm.correo" maxlength="120" required></label>
+            <label>Perfil *<select v-model="accountForm.perfil" required><option value="OPERADOR">Operador</option><option value="SUPERVISOR">Supervisor</option></select></label>
+            <label>{{ accountEditId ? 'Nueva contraseña (opcional)' : 'Contraseña inicial *' }}<input type="password" v-model="accountForm.clave" minlength="12" :required="!accountEditId"></label>
+            <div class="form-actions"><button class="primary" :disabled="busy">{{ accountEditId ? 'Guardar cuenta' : 'Crear cuenta' }}</button><button type="button" class="quiet" @click="resetAccountForm(); showAccountForm = false">Cancelar</button></div>
+          </form>
+          <div class="unit-filters"><input class="search" placeholder="Buscar por nombre o correo" v-model.trim="accountQuery"><select v-model="accountProfile" aria-label="Filtrar por perfil"><option value="TODOS">Todos los perfiles</option><option value="OPERADOR">Operador</option><option value="SUPERVISOR">Supervisor</option></select><select v-model="accountStatus" aria-label="Filtrar por estado"><option value="TODOS">Todos los estados</option><option value="1">Activa</option><option value="0">Inactiva</option></select></div>
+          <div class="card"><h2>Cuentas</h2><div class="table-wrap"><table><thead><tr><th>Nombre</th><th>Correo</th><th>Perfil</th><th>Estado</th><th>Acción</th></tr></thead><tbody>
+            <tr v-for="a in visibleAccounts" :key="a.ID_USUARIO"><td>{{ a.NOMBRE }}</td><td>{{ a.CORREO }}</td><td><span class="status-chip neutral">{{ a.PERFIL }}</span></td><td><span :class="['status-chip', a.ACTIVO ? 'active-status' : 'inactive-status']">{{ a.ACTIVO ? 'Activa' : 'Inactiva' }}</span></td><td class="row-actions"><button class="link" @click="editAccount(a)">Editar</button><button :class="a.ACTIVO ? 'danger-outline' : 'outline'" @click="toggleAccount(a)" :disabled="a.ID_USUARIO === user.id">{{ a.ACTIVO ? 'Desactivar' : 'Activar' }}</button></td></tr>
+          </tbody></table></div></div>
+        </section>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

@@ -63,6 +63,7 @@ th { color: #4c6880; background: #f4f8fb; }
 .search-picker-control { display: flex; align-items: stretch; }
 .search-picker-control input { flex: 1; min-width: 0; border-radius: .4rem 0 0 .4rem; }
 .search-picker-control > .status-chip { align-self: center; margin-left: .4rem; white-space: nowrap; }
+.history-picker .search-picker-control > .status-chip { display: none; }
 .search-picker-control button { border: 1px solid #b7cadc; border-left: 0; border-radius: 0 .4rem .4rem 0; background: #fff; color: #355977; padding: 0 .75rem; }
 .search-picker-options { position: absolute; z-index: 30; left: 0; right: 0; top: calc(100% + .2rem); max-height: 15rem; overflow-y: auto; border: 1px solid #b7cadc; border-radius: .4rem; background: #fff; box-shadow: 0 .5rem 1.4rem #12314b26; }
 .search-picker-options button { display: block; width: 100%; border: 0; border-radius: 0; padding: .65rem .8rem; background: #fff; color: #193951; text-align: left; font-weight: 500; }

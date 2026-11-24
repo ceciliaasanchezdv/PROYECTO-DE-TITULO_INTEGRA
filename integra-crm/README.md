@@ -8,7 +8,7 @@ Aplicación de TecnoHogar para registrar lotes, unidades, ventas, devoluciones y
 - Node.js 22 o posterior.
 - Oracle Autonomous Database con el esquema `INTEGRA` y permisos para crear tablas, secuencias y disparadores, además de espacio asignado para sus objetos.
 
-#Perfiles
+## Perfiles
 - Supervisor:
 EMAIL=supervisor@integra.test
 PASSWORD=SuperIntegr@

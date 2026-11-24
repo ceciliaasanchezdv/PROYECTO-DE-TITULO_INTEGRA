@@ -13,8 +13,7 @@ La aplicación web está implementada con Vue 3, Node.js y Express. Se ejecutó 
 
 Para instalar y ejecutar la versión actual, consulta el [README de la aplicación](integra-crm/README.md).
 
-No se incluyen contraseñas ni archivos de configuración privados. Las cuentas y los registros `DEMO26` son datos de demostración.
+Las cuentas y los registros `DEMO26` son datos de demostración.
 
 ## Autoría
-
 Proyecto individual de Cecilia Sánchez de Vicente. TecnoHogar es una empresa ficticia utilizada para desarrollar el caso académico.
